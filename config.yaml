@@ -9,8 +9,13 @@ networking:
 folders:
     - map: ../phpbb
       to: /var/www/html
+      owner: www-data
+      group: www-data
     - map: ../phpBB3-Authenticator-Ostiary
       to: /var/www/html/ext/hackthissite.org/ostiary-auth
+      owner: www-data
+      group: www-data
+
 
 nginx: "phpbb"
 

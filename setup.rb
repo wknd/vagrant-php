@@ -37,7 +37,7 @@ class Build
     # Register All Of The Configured Shared Folders
     if settings['folders'].kind_of?(Array)
       settings["folders"].each do |folder|
-        config.vm.synced_folder folder["map"], folder["to"] ||= nil
+        config.vm.synced_folder folder["map"], folder["to"], owner: folder["owner"] ||= nil, group: folder["group"] ||= nil
       end
     end
 

@@ -22,6 +22,7 @@ if [ "$1" = "nginx" ]; then
         phpbb)
             echo "setting things up for PHPBB"
             cp /vagrant/configs/nginx.phpbb.conf /etc/nginx/sites-available/default
+            mysql -u root -p"vagrant" < /vagrant/configs/mysql.phpbb.sql
             ;;
     esac
     echo "restarting services"
