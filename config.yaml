@@ -1,0 +1,21 @@
+---
+ip: "192.168.7.7"
+memory: 1024
+cpus: 2
+
+networking:
+    - public: true
+
+folders:
+    - map: ../phpbb
+      to: /var/www/html
+    - map: ../phpBB3-Authenticator-Ostiary
+      to: /var/www/html/ext/hackthissite.org/ostiary-auth
+
+nginx: "phpbb"
+
+# ports:
+#     - guest: 80
+#       host: 8000
+
+
