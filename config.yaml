@@ -12,7 +12,7 @@ folders:
       owner: www-data
       group: www-data
     - map: ../phpBB3-Authenticator-Ostiary
-      to: /var/www/html/ext/hackthissite.org/ostiary-auth
+      to: /var/www/html/ext/hackthissite/ostiary
       owner: www-data
       group: www-data
 
