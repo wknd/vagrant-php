@@ -62,6 +62,8 @@ class Build
           s.args << "--php"
           s.args << settings["php"]["version"]
         end
+        
+        s.env = settings["env"]
     end
   end
 end

@@ -19,11 +19,18 @@ folders:
 mysql:
   password: "floopy"
 
-nginx: 
-  mode: "phpbb"
-
 php:
   version: "7.2"
+  
+nginx: 
+  mode: "phpbb"
+  
+# project specific configs
+env: 
+    databasename: "phpbb"
+    username: "forums"
+    password: "6hgQJiDxx5VgY9UhAx"
+
 
 # ports:
 #     - guest: 80
