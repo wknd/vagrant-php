@@ -44,9 +44,23 @@ class Build
 #    config.vm.provision :shell, path: "bootstrap.sh"
     config.vm.provision "shell" do |s|
         s.path = "bootstrap.sh"
-        s.args = "nginx phpbb"
-        if settings["nginx"] ||= false
-          s.args = ["nginx", settings["nginx"]] 
+        s.args = Array.new
+        if settings["nginx"]["mode"] ||= false
+          s.args << "--nginx"
+          s.args << settings["nginx"]["mode"]
+        end
+        
+        if settings["mysql"]["password"] ||= false
+          s.args << "--mysql"
+          s.args << settings["mysql"]["password"]
+        else
+          s.args << "--mysql"
+          s.args << "vagrant" # default password
+        end
+        
+        if settings["php"]["version"] ||= false
+          s.args << "--php"
+          s.args << settings["php"]["version"]
         end
     end
   end

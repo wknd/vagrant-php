@@ -16,11 +16,15 @@ folders:
       owner: www-data
       group: www-data
 
+mysql:
+  password: "floopy"
 
-nginx: "phpbb"
+nginx: 
+  mode: "phpbb"
+
+php:
+  version: "7.2"
 
 # ports:
 #     - guest: 80
 #       host: 8000
-
-
