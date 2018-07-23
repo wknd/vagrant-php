@@ -75,13 +75,32 @@ else
   case "$MODE" in
       phpbb)
           echo -e "\e[0msetting things up for PHPBB"
-          cp /vagrant/configs/nginx.phpbb.conf /etc/nginx/sites-available/default
+          cp /vagrant/configs/phpbb/nginx.phpbb.conf /etc/nginx/sites-available/default
           if [ -z ${MYSQLPASSWD+x} ]; then
               echo -e "\e[31mERROR: MySQL root password \e[1mnot\e[21m set, can't create db for phpbb\e[0m"
           else
-              sed -e "s/--DATABASE--/$databasename/g" -e "s/--USERNAME--/$username/g" -e "s/--PASSWORD--/$password/g" /vagrant/configs/mysql.phpbb.sql | mysql -u root -p"$MYSQLPASSWD"
+              sed -e "s/--DATABASE--/$databasename/g" -e "s/--USERNAME--/$username/g" -e "s/--PASSWORD--/$password/g" /vagrant/configs/phpbb/mysql.phpbb.sql | mysql -u root -p"$MYSQLPASSWD"
           fi
           ;;
+      symfony-dev)
+          echo -e "\e[0msetting things up for symfony development"
+          echo -e "\e[0minstalling composer"
+          EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          ACTUAL_SIGNATURE="$(php -r "echo hash_file('SHA384', 'composer-setup.php');")"
+
+          if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+          then
+              >&2 echo 'ERROR: Invalid installer signature'
+              rm composer-setup.php
+              exit 1
+          fi
+
+          php composer-setup.php --quiet
+          RESULT=$?
+          rm composer-setup.php
+          mv composer.phar /usr/local/bin/composer
+      ;;
   esac
   echo -e "\e[94mrestarting services\e[0m"
   service nginx restart
