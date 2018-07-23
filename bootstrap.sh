@@ -104,6 +104,14 @@ else
           RESULT=$?
           rm composer-setup.php
           mv composer.phar /usr/local/bin/composer
+          
+          echo -e "\e[0mcreating db and user for symfony"
+          if [ -z ${MYSQLPASSWD+x} ]; then
+              echo -e "\e[31mERROR: MySQL root password \e[1mnot\e[21m set, can't create db for symfony\e[0m"
+          else
+              sed -e "s/--DATABASE--/$databasename/g" -e "s/--USERNAME--/$username/g" -e "s/--PASSWORD--/$password/g" /vagrant/configs/symfony/mysql.symfony.sql | mysql -u root -p"$MYSQLPASSWD"
+          fi
+          
       ;;
   esac
   echo -e "\e[94mrestarting services\e[0m"
