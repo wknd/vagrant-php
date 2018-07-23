@@ -86,7 +86,7 @@ else
           echo -e "\e[0msetting things up for symfony development"
           
           echo -e "\e[0minstalling extra php dependencies"
-          apt-get -qq -y install php"$PHPVERSION"-zip
+          apt-get -qq -y install php"$PHPVERSION"-zip > /dev/null
           
           echo -e "\e[0minstalling composer"
           EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
