@@ -22,8 +22,8 @@ case $key in
     shift # past argument
     shift # past value
     ;;
-    -n|--nginx)
-    NGINXMODE="$2"
+    -m|--mode)
+    MODE="$2"
     shift # past argument
     shift # past value
     ;;
@@ -68,11 +68,11 @@ else
 fi
 
 echo -e "\e[0m"
-if [ -z ${NGINXMODE+x} ]; then
+if [ -z ${MODE+x} ]; then
   echo -e "\e[93mWARNING: no nginx config specified, using system default\e[0m"
 else
   echo -e "\e[94msetting proper nginx config\e[0m"
-  case "$NGINXMODE" in
+  case "$MODE" in
       phpbb)
           echo -e "\e[0msetting things up for PHPBB"
           cp /vagrant/configs/nginx.phpbb.conf /etc/nginx/sites-available/default

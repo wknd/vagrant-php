@@ -22,8 +22,7 @@ mysql:
 php:
   version: "7.2"
   
-nginx: 
-  mode: "phpbb"
+mode: "phpbb"
   
 # project specific configs
 env: 

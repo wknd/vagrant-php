@@ -45,9 +45,9 @@ class Build
     config.vm.provision "shell" do |s|
         s.path = "bootstrap.sh"
         s.args = Array.new
-        if settings["nginx"]["mode"] ||= false
-          s.args << "--nginx"
-          s.args << settings["nginx"]["mode"]
+        if settings["mode"] ||= false
+          s.args << "--mode"
+          s.args << settings["mode"]
         end
         
         if settings["mysql"]["password"] ||= false
